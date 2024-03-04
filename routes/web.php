@@ -28,4 +28,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/home', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+Route::get('/home', function () {
+    return view('client.home');
+})->middleware(['auth', 'verified'])->name('client.home');
+
+
+Route::get('/home', function () {
+    return view('organisateur.home');
+})->middleware(['auth', 'verified'])->name('organisateur.home');
+
 require __DIR__.'/auth.php';
