@@ -18,9 +18,14 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function createCli(): View
     {
-        return view('auth.register');
+        return view('auth.registerClient', ['role' => 'client']);
+    }
+
+    public function createOrg(): View
+    {
+        return view('auth.registerOrganisateur', ['role' => 'organisateur']);
     }
 
     /**
@@ -33,12 +38,14 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'role' => ['required', 'string', 'in:client,organisateur'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 
