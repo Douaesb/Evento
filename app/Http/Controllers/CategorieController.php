@@ -33,6 +33,24 @@ class CategorieController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        try {
+            $request->validate([
+                'nom' => ['required', 'string', 'max:255'],
+            ]);
+                $oneCategorie = Categorie::findOrFail($request->categorieID);
+    
+            $oneCategorie->update([
+                'nom' => $request->nom,
+            ]);
+    
+            return redirect()->route('categories');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+    
     public function delete(Categorie $categorie){
         $categorie->delete();
         return redirect()->route('categories');

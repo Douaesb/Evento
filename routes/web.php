@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Evenement;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,8 +47,12 @@ Route::get('/home', function () {
 
 Route::get('/Categories',[CategorieController::class, 'view'])->name('categories');
 Route::post('/Categories',[CategorieController::class, 'create'])->name('addCategorie');
-
+Route::put('/Categorie',[CategorieController::class, 'update'])->name('updateCategorie');
 Route::delete('/Categories/{categorie}',[CategorieController::class, 'delete'])->name('deleteCategorie');
+
+
+Route::get('/Evenements',[EvenementController::class, 'view'])->name('Evenements');
+
 
 
 
