@@ -14,7 +14,7 @@
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-600">
                         <h3 class="text-lg font-semibold text-gray-900 text-black">
-                            Create New categorie
+                            Create New evenement
                         </h3>
                         <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600 hover:text-white"
@@ -28,16 +28,16 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form class="p-4 md:p-5" action="{{ route('addCategorie') }}" method="post">
+                    <form class="p-4 md:p-5" action="{{ route('addevenement') }}" method="post">
                         @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
                                 <label for=""
                                     class="block mb-2 text-sm font-medium text-gray-900 text-black">nom
-                                    categorie </label>
+                                    evenement </label>
                                 <input type="text" name="nom" id=""
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
-                                    placeholder="Type categorie title" required="">
+                                    placeholder="Type evenement title" required="">
                             </div>
                         </div>
                         <button type="submit" name="addcat"
@@ -48,7 +48,7 @@
                                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            Add new categorie
+                            Add new evenement
                         </button>
                     </form>
                 </div>
@@ -62,7 +62,7 @@
             <div class="px-6 py-8 max-w-4xl mx-auto">
                 <div class="max-w-4xl mx-auto">
                     <div class="bg-blue-200 rounded-3xl p-8 mb-5">
-                        <h1 class="text-3xl font-bold mb-10">Categories</h1>
+                        <h1 class="text-3xl font-bold mb-10">evenements</h1>
                         <div class="text-xl font-semibold text-red-500">
                         </div>
                         <hr class="my-10 border border-blue-700">
@@ -81,22 +81,22 @@
                                 <a class="text-gray-600 group-hover:text-gray-800 group-hover:smooth-hover text-center"
                                     href="#"><button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                                         type="button">
-                                        Create categorie </button> </a>
+                                        Create evenement </button> </a>
                             </div>
-                            <!-- card categorie -->
-                            @foreach ($categories as $categorie)
+                            <!-- card evenement -->
+                            @foreach ($evenements as $evenement)
                                 <div
                                     class="flex flex-col items-center justify-around bg-white overflow-hidden shadow sm:rounded-lg h-[100px] p-1">
                                     <div class="flex justify-center justify-center w-10">
                                         <span
-                                            class="mt-1 text-xl font-semibold text-black whitespace-nowrap">{{ $categorie->nom }}</span>
+                                            class="mt-1 text-xl font-semibold text-black whitespace-nowrap">{{ $evenement->nom }}</span>
                                     </div>
                                     <div class="flex items-center gap-6">
-                                        <a href="#" title="Edit" class="editCategorieButton"
+                                        <a href="#" title="Edit" class="editevenementButton"
                                             data-modal-target="authentication-modal"
                                             data-modal-toggle="authentication-modal"
-                                            data-categorie-id="{{ $categorie->id }}"
-                                            data-categorie-name="{{ $categorie->nom }}">
+                                            data-evenement-id="{{ $evenement->id }}"
+                                            data-evenement-name="{{ $evenement->nom }}">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
                                                 viewBox="0 0 512 512">
@@ -104,7 +104,7 @@
                                                     d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
                                             </svg>
                                         </a>
-                                        <form action="{{ route('deleteCategorie', $categorie) }}" method="post">
+                                        <form action="{{ route('deleteevenement', $evenement) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <div title="delete">
@@ -137,7 +137,7 @@
                         <!-- Modal header -->
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 text-black">
-                                Update categorie
+                                Update evenement
                             </h3>
                             <button type="button"
                                 class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600 hover:text-white"
@@ -153,17 +153,17 @@
                         <!-- Modal body -->
                         <div class="p-4 md:p-5">
                             <form class="space-y-4"
-                                action="{{ route('updateCategorie') }}" method="post">
+                                action="{{ route('updateevenement') }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="col-span-2">
-                                    <input type="hidden" name="categorieID" id="editCategorieId"
-                                        value="{{ $categorie->id }}">
+                                    <input type="hidden" name="evenementID" id="editevenementId"
+                                        value="{{ $evenement->id }}">
                                     <label for=""
-                                        class="block mb-2 text-sm font-medium text-gray-900 text-black">Categorie
+                                        class="block mb-2 text-sm font-medium text-gray-900 text-black">evenement
                                         Title</label>
                                     <input type="text" name="nom" id="editName"
-                                        value="{{ $categorie->nom }}"
+                                        value="{{ $evenement->nom }}"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
                                         placeholder="Type category name" required="">
                                 </div>
@@ -176,7 +176,7 @@
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Update Categorie
+                                    Update evenement
                                 </button>
                             </form>
                         </div>
@@ -187,18 +187,18 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const editButtons = document.querySelectorAll('.editCategorieButton');
-            const editCategorieIdInput = document.getElementById('editCategorieId');
+            const editButtons = document.querySelectorAll('.editevenementButton');
+            const editevenementIdInput = document.getElementById('editevenementId');
             const editNameInput = document.getElementById('editName');
 
             editButtons.forEach(function(button) {
                 button.addEventListener('click', function(event) {
                     event.preventDefault();
 
-                    const categoryId = this.getAttribute('data-categorie-id');
-                    const categoryName = this.getAttribute('data-categorie-name');
+                    const categoryId = this.getAttribute('data-evenement-id');
+                    const categoryName = this.getAttribute('data-evenement-name');
 
-                    editCategorieIdInput.value = categoryId;
+                    editevenementIdInput.value = categoryId;
                     editNameInput.value = categoryName;
 
                     console.log(categoryId, categoryName);
