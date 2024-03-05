@@ -37,7 +37,7 @@
         <div class="max-w-7xl w-full mx-auto py-16 pt-20">
             <div class="grid lg:grid-cols-2 justify-center items-center gap-10">
                 <div>
-                    <h1 class="md:text-5xl text-4xl text-blue-900 font-extrabold mb-6 md:!leading-[55px]">Weclome to Evento, keep in touch
+                    <h1 class="md:text-5xl text-4xl text-blue-900 font-extrabold mb-6 md:!leading-[55px]">Welcome to Evento, keep in touch
                     </h1>
                     <div class="max-w-7xl mx-auto p-6 lg:p-8">
                         <div class="flex justify-start ">
