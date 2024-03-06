@@ -52,6 +52,7 @@ Route::delete('/Categories/{categorie}',[CategorieController::class, 'delete'])-
 
 
 Route::get('/Evenements',[EvenementController::class, 'view'])->name('Evenements');
+Route::post('/Evenements',[EvenementController::class, 'create'])->name('addEvent');
 
 
 
