@@ -50,9 +50,13 @@ Route::post('/Categories',[CategorieController::class, 'create'])->name('addCate
 Route::put('/Categorie',[CategorieController::class, 'update'])->name('updateCategorie');
 Route::delete('/Categories/{categorie}',[CategorieController::class, 'delete'])->name('deleteCategorie');
 
+Route::get('/allEvenements',[EvenementController::class, 'viewAll'])->name('allEvenements');
+
 
 Route::get('/Evenements',[EvenementController::class, 'view'])->name('Evenements');
 Route::post('/Evenements',[EvenementController::class, 'create'])->name('addEvent');
+Route::patch('/update-status/{event}', [EvenementController::class, 'updateStatus'])->name('updateStatus');
+
 
 
 

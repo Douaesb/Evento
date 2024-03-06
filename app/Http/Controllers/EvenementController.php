@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class EvenementController extends Controller
 {
 
+    public function viewAll()
+    {
+        $user = Auth::id();
+        $categories = Categorie::all();
+        $evenements = Evenement::all();
+        // dd($evenements);
+        return view('admin.allEvents', compact('evenements'), compact('categories'));
+    }
+
+
     public function view()
     {
         $user = Auth::id();
@@ -46,4 +56,16 @@ class EvenementController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function updateStatus(Request $request, $eventId)
+{
+    $request->validate([
+        'statut' => 'required|in:Accepted,Rejected',
+    ]);
+    $event = Evenement::findOrFail($eventId);
+    $event->statut = $request->statut;
+    $event->save();
+    return back();
+}
+
 }
