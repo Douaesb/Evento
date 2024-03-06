@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvenementController extends Controller
 {
 
     public function view()
     {
+        $user = Auth::id();
         $categories = Categorie::all();
-        $evenements = Evenement::all();
+        $evenements = Evenement::where('user_id',$user)
+        ->orderby('created_at','desc')
+        ->get();
         // dd($evenements);
         return view('organisateur.evenement', compact('evenements'), compact('categories'));
     }
