@@ -66,6 +66,8 @@ Route::post('/create-reservation/{eventId}', [ReservationController::class, 'cre
 Route::get('/view-reservations/{eventId}', [ReservationController::class, 'viewReservations'])
     ->name('viewReservations');
 Route::patch('/update-reservation-statut/{reservationId}', [ReservationController::class, 'updateReservationStatus'])->name('updateReservationStatus');
+Route::get('/generate-ticket/{reservation}/{event}', [ReservationController::class, 'generateTicket'])->name('generateTicket');
+
 
 
 
