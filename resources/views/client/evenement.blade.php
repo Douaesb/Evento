@@ -21,26 +21,42 @@
                                                 </p>
                                             </div>
                                             <div>
-                                                {{-- @if ($evenement->statut == 'Pending') --}}
-                                                {{-- @if ($reservation->statut == 'Reserve') --}}
+                                                @if ($evenement->reservations->isEmpty())
+                                                    <div class="flex gap-2">
+                                                        <form action="{{ route('createReservation', ['eventId' => $evenement->id]) }}" method="post">
+                                                            @csrf
+                                                            <button type="submit" class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
+                                                        </form>
+                                                    </div>
+                                                @else
+                                                    @php
+                                                        $userReservation = $evenement->reservations->where('user_id', Auth::id())->first();
+                                                    @endphp
+                                            
+                                                    @if ($userReservation)
+                                                        @if ($userReservation->statut == 'Reserved')
+                                                            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{ $userReservation->statut }}</span>
+                                                        @elseif($userReservation->statut == 'Pending')
+                                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-400 border border-yellow-400">{{ $userReservation->statut }}</span>
+                                                        @elseif($userReservation->statut == 'Rejected')
+                                                            <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">{{ $userReservation->statut }}</span>
+                                                        @endif
+                                                    @else
                                                         <div class="flex gap-2">
-                                                            {{-- <form action="{{ route('updateStatus', $evenement->id) }}" --}}
-                                                                {{-- method="post"> --}}
+                                                            <form action="{{ route('createReservation', ['eventId' => $evenement->id]) }}" method="post">
                                                                 @csrf
-                                                                @method('patch')
-                                                                <input type="hidden" name="statut" value="Accepted">
-                                                                <button type="submit"
-                                                                    class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
-                                                            {{-- </form> --}}
+                                                                <button type="submit" class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
+                                                            </form>
                                                         </div>
-                                                 {{-- @endif --}}
-                                            </div>
+                                                    @endif
+                                                @endif
+                                            </div>                                            
                                         </div>
-                                        
+
                                         <h1 class="flex justify-center items-center text-xl font-semibold ">
                                             {{ $evenement->titre }}
                                         </h1>
-                                        <div class="flex justify-between">
+                                        <div class="">
                                             <div class="flex flex-col justify-between gap-2 text-sm text-gray-600">
                                                 <div class="flex w-full gap-6">
                                                     <div class="flex items-center">
@@ -54,9 +70,8 @@
                                                         <p class="ml-2 text-red-800"> {{ $evenement->lieu }}</p>
                                                     </div>
                                                     <div class="flex items-center">
-                                                        <svg fill="#919191" height="16" width="16"
-                                                            version="1.1" id="Capa_1"
-                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        <svg fill="#919191" height="16" width="16" version="1.1"
+                                                            id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
                                                             viewBox="0 0 283.629 283.629" xml:space="preserve"
                                                             stroke="#919191">
@@ -147,14 +162,18 @@
                                                         <span class="ml-1 leading-none"> {{ $evenement->date }}
                                                         </span>
                                                     </div>
-                                                    <div class="flex items-center gap-4 h-fit flex-end justify-end">                                                   
-                                                        <a href="{{ route('eventDetails', ['id' => $evenement->id]) }}" title="View Details">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" alt="title"
-                                                                height="16" width="18"
-                                                                viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                                                <path fill="#dfa401"
-                                                                    d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z" />
+                                                    <div class="flex gap-4 h-fit">
+                                                        <a type="button"
+                                                            href="{{ route('eventDetails', ['id' => $evenement->id]) }}"
+                                                            title="View Details"
+                                                            class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
+                                                            <svg class="me-2 h-3 w-3" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                                viewBox="0 0 20 14">
+                                                                <path
+                                                                    d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                                                             </svg>
+                                                            View more
                                                         </a>
                                                     </div>
                                                 </div>

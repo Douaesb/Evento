@@ -3,7 +3,9 @@
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Models\Evenement;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,24 +47,28 @@ Route::get('/homeO', function () {
 })->middleware(['auth', 'verified'])->name('organisateur.home');
 
 
-Route::get('/Categories',[CategorieController::class, 'view'])->name('categories');
-Route::post('/Categories',[CategorieController::class, 'create'])->name('addCategorie');
-Route::put('/Categorie',[CategorieController::class, 'update'])->name('updateCategorie');
-Route::delete('/Categories/{categorie}',[CategorieController::class, 'delete'])->name('deleteCategorie');
+Route::get('/Categories', [CategorieController::class, 'view'])->name('categories');
+Route::post('/Categories', [CategorieController::class, 'create'])->name('addCategorie');
+Route::put('/Categorie', [CategorieController::class, 'update'])->name('updateCategorie');
+Route::delete('/Categories/{categorie}', [CategorieController::class, 'delete'])->name('deleteCategorie');
 
-Route::get('/allEvenements',[EvenementController::class, 'viewAll'])->name('allEvenements');
+Route::get('/allEvenements', [EvenementController::class, 'viewAll'])->name('allEvenements');
 
-Route::get('/Events',[EvenementController::class, 'viewClient'])->name('EvenementsC');
+Route::get('/Events', [EvenementController::class, 'viewClient'])->name('EvenementsC');
 
-Route::get('/Evenements',[EvenementController::class, 'view'])->name('Evenements');
-Route::post('/Evenements',[EvenementController::class, 'create'])->name('addEvent');
+Route::get('/Evenements', [EvenementController::class, 'view'])->name('Evenements');
+Route::post('/Evenements', [EvenementController::class, 'create'])->name('addEvent');
 Route::patch('/update-status/{event}', [EvenementController::class, 'updateStatus'])->name('updateStatus');
-Route::delete('/Evenements/{evenement}',[EvenementController::class, 'delete'])->name('deleteEvenement');
+Route::delete('/Evenements/{evenement}', [EvenementController::class, 'delete'])->name('deleteEvenement');
 Route::put('/update-event', [EvenementController::class, 'update'])->name('updateEvent');
 Route::get('/eventDetails/{id}', [EvenementController::class, 'showDetails'])->name('eventDetails');
+Route::post('/create-reservation/{eventId}', [ReservationController::class, 'createReservation'])->name('createReservation');
+Route::get('/view-reservations/{eventId}', [ReservationController::class, 'viewReservations'])
+    ->name('viewReservations');
+Route::patch('/update-reservation-statut/{reservationId}', [ReservationController::class, 'updateReservationStatus'])->name('updateReservationStatus');
 
 
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

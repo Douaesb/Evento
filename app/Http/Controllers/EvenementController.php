@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Evenement;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,12 +23,11 @@ class EvenementController extends Controller
 
     public function viewClient()
     {
-        $user = Auth::id();
+        $reservation = Reservation::all();
         $evenements = Evenement::where('statut', "Accepted")
         ->orderby('created_at', 'desc')
         ->get();
-        // dd($evenements);
-        return view('client.evenement', compact('evenements'));
+        return view('client.evenement', compact('evenements'), compact('reservation'));
     }
 
 

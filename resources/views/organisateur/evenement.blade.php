@@ -47,7 +47,7 @@
                                         <label for=""
                                             class="block mb-2 text-sm font-medium text-gray-900 text-black">Event
                                             title</label>
-                                        <input type="text" name="titre" 
+                                        <input type="text" name="titre"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="Type event title" required="">
                                     </div>
@@ -63,7 +63,7 @@
                                         <label for=""
                                             class="block mb-2 text-sm font-medium text-gray-900 text-black">Event
                                             location</label>
-                                        <input type="text" name="lieu" 
+                                        <input type="text" name="lieu"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="Type event location" required="">
                                     </div>
@@ -72,7 +72,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 text-black">Event number
                                             of
                                             places</label>
-                                        <input type="number" name="places" 
+                                        <input type="number" name="places"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="Type event places" required="">
                                     </div>
@@ -80,7 +80,7 @@
                                         <label for="category"
                                             class="block mb-2 text-sm font-medium text-gray-900 text-black">reservation
                                             mode</label>
-                                        <select  name="mode"
+                                        <select name="mode"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500">
                                             <option selected disabled="">choose mode of reservation</option>
                                             <option value="automatique">automatique</option>
@@ -225,7 +225,7 @@
                             <!-- Article -->
                             <article class="overflow-hidden rounded-lg shadow-lg">
                                 <div
-                                    class="group bg-gray-50 py-14 px-4 flex flex-col space-y-2 items-center cursor-pointer rounded-md ">
+                                    class="group bg-gray-50 py-16 px-4 flex flex-col space-y-2 items-center cursor-pointer rounded-md ">
                                     <a data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                                         class="bg-gray-200 text-yellow-700 group-hover:text-gray-800 group-hover:smooth-hover flex w-20 h-20 rounded-full items-center justify-center"
                                         href="#">
@@ -247,9 +247,9 @@
                         <!-- END Column -->
 
                         @foreach ($evenements as $evenement)
-                            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+                            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 h-full">
                                 <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 ">
-                                    <div class="flex flex-col justify-between py-4 px-8 h-52">
+                                    <div class="flex flex-col justify-between py-4 px-8 h-60">
                                         <div class="flex justify-between">
                                             <div>
                                                 <p class="text-black">
@@ -332,7 +332,7 @@
                                                         <p class="ml-2"> {{ $evenement->places }}</p>
                                                     </div>
                                                 </div>
-                                                <div class="flex gap-16">
+                                                <div class="flex gap-20">
 
                                                     <div class="flex items-center">
                                                         <svg viewBox="0 0 24 24" height="16" width="16"
@@ -371,7 +371,7 @@
                                                 </div>
 
 
-                                                <div class="flex justify-between items-center gap-9 mt-3">
+                                                <div class="flex justify-between items-center mt-3">
                                                     <div class="flex items-center text-green-500 gap-2">
                                                         <svg class="w-4 h-4 fill-current"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -414,15 +414,23 @@
                                                                 </svg>
                                                             </button>
                                                         </form>
-                                                        <a href="" title="view details">
+                                                        {{-- <a href="" title="view details">
                                                             <svg xmlns="http://www.w3.org/2000/svg" alt="title"
                                                                 height="16" width="18"
                                                                 viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
                                                                 <path fill="#dfa401"
                                                                     d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z" />
                                                             </svg>
-                                                        </a>
+                                                        </a> --}}
                                                     </div>
+                                                </div>
+                                                <div class="flex justify-center">
+                                                    <a href="{{ route('viewReservations', $evenement->id) }}"
+                                                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500">
+                                                        <span
+                                                            class="relative px-4 py-1  bg-blue-100 dark:bg-gray-900 rounded-md ">
+                                                            view reservations here </span>
+                                                </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -472,8 +480,9 @@
 
                     console.log(eventId, eventTitre, eventDescription, eventLieu, eventPlaces,
                         eventMode, eventCategorie);
-                        console.log(eventIdInput.value, titreInput.value, descriptionInput.value, lieuInput.value, placesInput.value,
-                    modeInput.value, categorieInput.value);
+                    console.log(eventIdInput.value, titreInput.value, descriptionInput.value,
+                        lieuInput.value, placesInput.value,
+                        modeInput.value, categorieInput.value);
                 });
             });
         });
