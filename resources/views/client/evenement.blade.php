@@ -11,7 +11,7 @@
                         @foreach ($evenements as $evenement)
                             <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
                                 <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 ">
-                                    <div class="flex flex-col justify-between py-4 px-8 h-52">
+                                    <div class="flex flex-col justify-between py-4 px-8 h-60">
                                         <div class="flex justify-between">
                                             <div>
                                                 <p class="text-black">
@@ -23,34 +23,45 @@
                                             <div>
                                                 @if ($evenement->reservations->isEmpty())
                                                     <div class="flex gap-2">
-                                                        <form action="{{ route('createReservation', ['eventId' => $evenement->id]) }}" method="post">
+                                                        <form
+                                                            action="{{ route('createReservation', ['eventId' => $evenement->id]) }}"
+                                                            method="post">
                                                             @csrf
-                                                            <button type="submit" class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
+                                                            <button type="submit"
+                                                                class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
                                                         </form>
                                                     </div>
                                                 @else
                                                     @php
-                                                        $userReservation = $evenement->reservations->where('user_id', Auth::id())->first();
+                                                        $userReservation = $evenement->reservations
+                                                            ->where('user_id', Auth::id())
+                                                            ->first();
                                                     @endphp
-                                            
+
                                                     @if ($userReservation)
                                                         @if ($userReservation->statut == 'Reserved')
-                                                            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{ $userReservation->statut }}</span>
+                                                            <span
+                                                                class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{ $userReservation->statut }}</span>
                                                         @elseif($userReservation->statut == 'Pending')
-                                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-400 border border-yellow-400">{{ $userReservation->statut }}</span>
+                                                            <span
+                                                                class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-400 border border-yellow-400">{{ $userReservation->statut }}</span>
                                                         @elseif($userReservation->statut == 'Rejected')
-                                                            <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">{{ $userReservation->statut }}</span>
+                                                            <span
+                                                                class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">{{ $userReservation->statut }}</span>
                                                         @endif
                                                     @else
                                                         <div class="flex gap-2">
-                                                            <form action="{{ route('createReservation', ['eventId' => $evenement->id]) }}" method="post">
+                                                            <form
+                                                                action="{{ route('createReservation', ['eventId' => $evenement->id]) }}"
+                                                                method="post">
                                                                 @csrf
-                                                                <button type="submit" class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
+                                                                <button type="submit"
+                                                                    class="rounded px-4 py-1 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300">Reserve</button>
                                                             </form>
                                                         </div>
                                                     @endif
                                                 @endif
-                                            </div>                                            
+                                            </div>
                                         </div>
 
                                         <h1 class="flex justify-center items-center text-xl font-semibold ">
@@ -176,7 +187,27 @@
                                                             View more
                                                         </a>
                                                     </div>
+
                                                 </div>
+                                                @php
+                                                $userReservations = Auth::user()->reservations;
+                                            @endphp
+                                                @if ($userReservations->contains('evenement_id', $evenement->id) && $userReservations->contains('statut', 'Reserved'))
+                                                    <div class="flex justify-center">
+                                                        @foreach ($userReservations as $userReservation)
+                                                            @if ($userReservation->evenement_id == $evenement->id && $userReservation->statut == 'Reserved')
+                                                                <a href="{{ route('generateTicket', ['reservation' => $userReservation->id, 'event' => $evenement->id]) }}"
+                                                                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500">
+                                                                    <span
+                                                                        class="relative px-4 py-1 bg-blue-100 dark:bg-gray-900 rounded-md">
+                                                                        Generate your ticket here
+                                                                    </span>
+                                                                </a>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+
                                             </div>
                                         </div>
                                     </div>

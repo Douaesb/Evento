@@ -62,7 +62,7 @@
                                             N° de place : 
                                             <p class="ml-2"> {{ $reservation->numplace }}</p>
                                         </div>
-                                        @endif
+                                        @endif                                       
                                     </div>
 
                                 </div>

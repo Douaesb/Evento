@@ -63,4 +63,10 @@ class ReservationController extends Controller
         $reservation->save();
         return back();
     }
+
+
+    public function generateTicket(Reservation $reservation, Evenement $event)
+    {
+        return view('client.ticket', compact('reservation', 'event'));
+    }
 }
