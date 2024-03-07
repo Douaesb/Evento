@@ -35,12 +35,12 @@ Route::get('/homeA', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
-Route::get('/home', function () {
+Route::get('/homeC', function () {
     return view('client.home');
 })->middleware(['auth', 'verified'])->name('client.home');
 
 
-Route::get('/home', function () {
+Route::get('/homeO', function () {
     return view('organisateur.home');
 })->middleware(['auth', 'verified'])->name('organisateur.home');
 
@@ -52,12 +52,14 @@ Route::delete('/Categories/{categorie}',[CategorieController::class, 'delete'])-
 
 Route::get('/allEvenements',[EvenementController::class, 'viewAll'])->name('allEvenements');
 
+Route::get('/Events',[EvenementController::class, 'viewClient'])->name('EvenementsC');
 
 Route::get('/Evenements',[EvenementController::class, 'view'])->name('Evenements');
 Route::post('/Evenements',[EvenementController::class, 'create'])->name('addEvent');
 Route::patch('/update-status/{event}', [EvenementController::class, 'updateStatus'])->name('updateStatus');
 Route::delete('/Evenements/{evenement}',[EvenementController::class, 'delete'])->name('deleteEvenement');
 Route::put('/update-event', [EvenementController::class, 'update'])->name('updateEvent');
+Route::get('/eventDetails/{id}', [EvenementController::class, 'showDetails'])->name('eventDetails');
 
 
 

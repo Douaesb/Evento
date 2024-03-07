@@ -20,6 +20,17 @@ class EvenementController extends Controller
         return view('admin.allEvents', compact('evenements'), compact('categories'));
     }
 
+    public function viewClient()
+    {
+        $user = Auth::id();
+        $evenements = Evenement::where('statut', "Accepted")
+        ->orderby('created_at', 'desc')
+        ->get();
+        // dd($evenements);
+        return view('client.evenement', compact('evenements'));
+    }
+
+
 
     public function view()
     {
@@ -103,5 +114,12 @@ class EvenementController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('Evenements')->with('error', 'Error updating event');
         }
+    }
+
+    public function showDetails($id)
+    {
+        $event = Evenement::findOrFail($id);
+
+        return view('client.eventDetails', compact('event'));
     }
 }
