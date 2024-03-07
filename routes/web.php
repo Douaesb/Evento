@@ -56,6 +56,8 @@ Route::get('/allEvenements',[EvenementController::class, 'viewAll'])->name('allE
 Route::get('/Evenements',[EvenementController::class, 'view'])->name('Evenements');
 Route::post('/Evenements',[EvenementController::class, 'create'])->name('addEvent');
 Route::patch('/update-status/{event}', [EvenementController::class, 'updateStatus'])->name('updateStatus');
+Route::delete('/Evenements/{evenement}',[EvenementController::class, 'delete'])->name('deleteEvenement');
+Route::put('/update-event', [EvenementController::class, 'update'])->name('updateEvent');
 
 
 
