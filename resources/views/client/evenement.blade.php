@@ -2,14 +2,66 @@
     <div class="min-h-screen flex flex-col sm:flex-row bg-gray-100">
         @include('layouts.navigation')
         <div class="flex-grow p-4 bg-gray-200">
-            <section class="flex flex-wrap mt-20 mx-auto md:px-12 flex-grow">
+
+
+
+            <section class="flex flex-wrap mt-10 mx-auto md:px-12 flex-grow">
                 <div class="container mx-auto px-4 md:px-12">
                     <div class="flex justify-center bg-white rounded-xl p-2 w-40 mb-5 shadow-lg">
                         <h2 class="text-lg font-bold">Evenements</h2>
                     </div>
+                    <div class="mb-6 ">
+
+                        <form class="max-w-lg mx-auto" method="POST" action="{{ route('events.search') }}">
+                            @csrf
+                        <div class="flex">
+                                    <div class="relative">
+                                        <button id="dropdown-button" data-dropdown-toggle="dropdown"
+                                            class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200"
+                                            type="button">Categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                                            </svg></button>
+                                        <div id="dropdown"
+                                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                                                <li>
+                                                    <button type="button" value="all"
+                                                        class="category-filter-btn inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</button>
+                                                </li>
+                                                @foreach ($categories as $categorie)
+                                                    <li>
+                                                        <button type="button" value="{{ $categorie->id }}"
+                                                            class="category-filter-btn inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categorie->nom }}</button>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <div class="relative w-full">
+                                    <input type="search" id="search-dropdown" name="search"
+                                        class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                        placeholder="Rechercher les evenements par titre" />
+                                    <button type="submit"
+                                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                        </svg>
+                                        <span class="sr-only">Search</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                        <div class="no-events-message-container">
+                            <p class="no-events-message"></p>
+                        </div>
                         @foreach ($evenements as $evenement)
-                            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+                            <div class="event my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3" data-event-category="{{ $evenement->categorie->id }}">
                                 <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 ">
                                     <div class="flex flex-col justify-between py-4 px-8 h-60">
                                         <div class="flex justify-between">
@@ -190,8 +242,8 @@
 
                                                 </div>
                                                 @php
-                                                $userReservations = Auth::user()->reservations;
-                                            @endphp
+                                                    $userReservations = Auth::user()->reservations;
+                                                @endphp
                                                 @if ($userReservations->contains('evenement_id', $evenement->id) && $userReservations->contains('statut', 'Reserved'))
                                                     <div class="flex justify-center">
                                                         @foreach ($userReservations as $userReservation)
@@ -214,9 +266,54 @@
                                 </article>
                             </div>
                         @endforeach
+                  
                     </div>
                 </div>
             </section>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryButtons = document.querySelectorAll('.category-filter-btn');
+            const allEvents = document.querySelectorAll('.event');
+            const noEventsMessageContainer = document.querySelector('.no-events-message-container');
+    
+            categoryButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const selectedCategoryId = this.value;
+                    filterEventsByCategory(selectedCategoryId);
+                });
+            });
+    
+            function filterEventsByCategory(selectedCategoryId) {
+                let eventsFound = false;
+    
+                allEvents.forEach(event => {
+                    const eventCategoryId = event.getAttribute('data-event-category');
+                    if (selectedCategoryId === 'all' || eventCategoryId === selectedCategoryId) {
+                        event.style.display = 'block';
+                        eventsFound = true;
+                    } else {
+                        event.style.display = 'none';
+                    }
+                });
+                    if (!eventsFound) {
+                    const noEventsMessage = document.querySelector('.no-events-message');
+                    if (!noEventsMessage) {
+                        const messageElement = document.createElement('p');
+                        messageElement.textContent = 'No events found for the selected category.';
+                        messageElement.className = 'flex justify-center w-full no-events-message';
+                        noEventsMessageContainer.appendChild(messageElement);
+                    }
+                } else {
+                    const noEventsMessage = document.querySelector('.no-events-message');
+                    if (noEventsMessage) {
+                        noEventsMessage.remove();
+                    }
+                }
+            }
+        });
+    </script>
+    
 </x-app-layout>

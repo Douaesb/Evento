@@ -21,13 +21,18 @@ class EvenementController extends Controller
         return view('admin.allEvents', compact('evenements'), compact('categories'));
     }
 
-    public function viewClient()
+    public function viewClient(Request $request)
     {
+        $categories = Categorie::all();
         $reservation = Reservation::all();
-        $evenements = Evenement::where('statut', "Accepted")
-        ->orderby('created_at', 'desc')
-        ->get();
-        return view('client.evenement', compact('evenements'), compact('reservation'));
+        $query = Evenement::query();
+        $query->where('statut', 'Accepted');
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where('titre', 'like', '%' . $searchTerm . '%');
+        }
+        $evenements = $query->orderBy('created_at', 'desc')->get();
+        return view('client.evenement', compact('evenements', 'reservation', 'categories'));
     }
 
 
