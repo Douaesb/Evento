@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
+use App\Models\Evenement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -39,5 +42,37 @@ class UserController extends Controller
     }
     return redirect()->route('users')->with('error', 'User not found.');
 }
+
+public function stats()
+{
+    $clientCount = User::where('role', 'client')->count();
+    $organisateurCount = User::where('role', 'organisateur')->count();
+    $totalEvents = Evenement::count();
+    $mostReservedEvent = Evenement::select('titre')
+    ->withCount('reservations')
+    ->orderBy('reservations_count', 'desc')
+    ->value('titre');
+    $mostActiveOrganisateur = User::select('name')
+    ->where('role', 'organisateur')
+    ->withCount('evenements')
+    ->orderBy('evenements_count', 'desc')
+    ->value('name');
+
+    $mostActiveClient = User::select('name')
+    ->where('role', 'client')
+    ->withCount('reservations')
+    ->orderBy('reservations_count', 'desc')
+    ->value('name');
+    $eventWithMostReservations = Evenement::select('titre')
+    ->withCount('reservations')
+    ->orderBy('reservations_count', 'desc')
+    ->value('titre');
+    $mostUsedCategory = Categorie::select('nom')
+    ->withCount('events')
+    ->orderBy('events_count', 'desc')
+    ->value('nom');
+    return view('admin.dashboard', compact('clientCount','organisateurCount','totalEvents','mostReservedEvent','mostActiveOrganisateur','mostActiveClient'));
+}
+
 
 }

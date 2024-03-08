@@ -34,9 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/homeA', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+Route::get('/homeA', [UserController::class, 'stats'])->name('admin.dashboard');
 
 Route::get('/homeC', function () {
     return view('client.home');
