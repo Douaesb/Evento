@@ -13,7 +13,7 @@
                     <div class="flex flex-wrap -mx-1 lg:-mx-4">
                         @foreach ($evenements as $evenement)
                             <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-                                <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 ">
+                                <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 border-2 border-blue-700 ">
                                     <div class="flex flex-col justify-between py-6 px-8 h-52">
                                         <div class="flex justify-between">
                                             <div>

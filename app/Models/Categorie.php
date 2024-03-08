@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +15,6 @@ class Categorie extends Model
 
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Evenement::class);
     }
 }

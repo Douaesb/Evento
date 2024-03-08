@@ -61,7 +61,7 @@
         <div class="flex-grow p-4 bg-gray-200">
             <div class="px-6 py-8 max-w-4xl mx-auto">
                 <div class="max-w-4xl mx-auto">
-                    <div class="bg-blue-200 rounded-3xl p-8 mb-5">
+                    <div class="bg-blue-200 border-2 border-blue-700 rounded-3xl p-8 mb-5">
                         <h1 class="text-3xl font-bold mb-10">Categories</h1>
                         <div class="text-xl font-semibold text-red-500">
                         </div>
