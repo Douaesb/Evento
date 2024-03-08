@@ -270,6 +270,10 @@
                     </div>
                 </div>
             </section>
+            <div class="mt-8 flex justify-center">
+                {{ $evenements->links('pagination::tailwind') }}
+            </div>
+
         </div>
     </div>
 
