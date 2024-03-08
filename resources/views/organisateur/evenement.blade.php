@@ -77,6 +77,15 @@
                                             placeholder="Type event places" required="">
                                     </div>
                                     <div class="col-span-2">
+                                        <label for=""
+                                            class="block mb-2 text-sm font-medium text-gray-900 text-black">Event
+                                            date
+                                            </label>
+                                        <input type="date" name="date"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
+                                         min="{{ now()->format('Y-m-d') }}" required="">
+                                    </div>
+                                    <div class="col-span-2">
                                         <label for="category"
                                             class="block mb-2 text-sm font-medium text-gray-900 text-black">reservation
                                             mode</label>
@@ -180,7 +189,15 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
                                         placeholder="Type event places" required="">
                                 </div>
-
+                                <div class="col-span-2">
+                                    <label for=""
+                                        class="block mb-2 text-sm font-medium text-gray-900 text-black">Event
+                                        date
+                                        </label>
+                                    <input type="date" name="date" id="date"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500"
+                                     min="{{ now()->format('Y-m-d') }}" required="">
+                                </div>
                                 <div class="col-span-2">
                                     <label for="mode"
                                         class="block mb-2 text-sm font-medium text-gray-900 text-black">Reservation
@@ -393,6 +410,7 @@
                                                             data-event-description="{{ $evenement->description }}"
                                                             data-event-lieu="{{ $evenement->lieu }}"
                                                             data-event-places="{{ $evenement->places }}"
+                                                            data-event-date="{{ $evenement->date }}"
                                                             data-event-mode="{{ $evenement->mode }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" height="16"
                                                                 width="16"
@@ -455,6 +473,7 @@
             const descriptionInput = document.getElementById('description');
             const lieuInput = document.getElementById('lieu');
             const placesInput = document.getElementById('places');
+            const dateInput = document.getElementById('date');
             const modeInput = document.getElementById('mode');
             const categorieInput = document.getElementById('categorie');
 
@@ -467,6 +486,7 @@
                     const eventDescription = this.getAttribute('data-event-description');
                     const eventLieu = this.getAttribute('data-event-lieu');
                     const eventPlaces = this.getAttribute('data-event-places');
+                    const eventDate = this.getAttribute('data-event-date');
                     const eventMode = this.getAttribute('data-event-mode');
                     const eventCategorie = this.getAttribute('data-event-categorie');
 
@@ -475,6 +495,7 @@
                     descriptionInput.value = eventDescription;
                     lieuInput.value = eventLieu;
                     placesInput.value = eventPlaces;
+                    dateInput.value = eventDate;
                     modeInput.value = eventMode;
                     categorieInput.value = eventCategorie;
 

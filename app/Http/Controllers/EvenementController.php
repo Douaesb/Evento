@@ -56,12 +56,13 @@ class EvenementController extends Controller
                 'lieu' => ['required', 'string', 'max:255'],
                 'places' => 'required',
                 'mode' => ['required', 'string', 'in:automatique,manuelle'],
+                'date' => ['required', 'date', 'after_or_equal:today'],
             ]);
             $user = auth()->user();
             Evenement::create([
                 'titre' => $request->titre,
                 'description' => $request->description,
-                'date' => now()->toDateString(),
+                'date' => $request->date,
                 'lieu' =>  $request->lieu,
                 'places' => $request->places,
                 'mode' => $request->mode,
@@ -100,6 +101,7 @@ class EvenementController extends Controller
                 'lieu' => ['required', 'string'],
                 'places' => ['required', 'integer'],
                 'mode' => ['required', 'in:automatique,manuelle'],
+                'date' => ['required', 'date', 'after_or_equal:today'],
             ]);
 
             $event = Evenement::findOrFail($request->event_id);
@@ -107,6 +109,7 @@ class EvenementController extends Controller
             $event->update([
                 'titre' => $request->titre,
                 'description' => $request->description,
+                'date' => $request->date,
                 'lieu' => $request->lieu,
                 'places' => $request->places,
                 'mode' => $request->mode,
