@@ -3,17 +3,27 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="font-[sans-serif] text-[#333] bg-white flex items-center justify-center md:h-screen p-4">
         <div class="shadow-[0_2px_16px_-3px_rgba(30,10,150,0.5)] max-w-6xl rounded-md p-6">
-            
+
             <div class="grid md:grid-cols-2 items-center gap-8">
                 <div class="max-md:order-1">
-                    <img src="../../img/loginimg.jpeg" class="lg:w-11/12 w-full object-cover"
-                        alt="login-image" />
+                    <img src="../../img/loginimg.jpeg" class="lg:w-11/12 w-full object-cover" alt="login-image" />
                 </div>
                 <form class="max-w-md w-full mx-auto" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-12">
                         <h3 class="text-4xl font-extrabold text-blue-900">Sign in</h3>
                     </div>
+                    @if (session('banned_message'))
+                       
+                        <div id="alert-border-2" class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <div class="ms-3 text-sm font-medium">
+                                {{ session('banned_message') }}
+                            </div>
+                        </div>
+                    @endif  
                     <div>
                         <div class="relative flex items-center">
                             <input name="email" type="text" required

@@ -29,6 +29,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         $user = $request->user();
+        if ($user->banned) {
+            auth()->logout();
+            return redirect()->route('login')->with('banned_message', 'You are banned from logging in.');
+        }
         if($user->role == 'admin'){
             return redirect()->route('admin.dashboard');
         }elseif($user->role == 'client'){

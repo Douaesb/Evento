@@ -156,50 +156,57 @@
 
     <ul class="flex flex-col py-4">
         @auth
-        @if (auth()->user()->role== 'admin')
-        <li>
-            <a href="{{route('admin.dashboard')}}"
-                class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                        class="bx bx-home"></i></span>
-                <span class="text-sm font-medium">Dashboard</span>
-            </a>
-        </li>
-       
-            <li>
-                <a href="{{route('categories')}}"
-                    class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                            class="bx bx-shopping-bag"></i></span>
-                    <span class="text-sm font-medium">Categories</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('allEvenements')}}"
-                    class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                            class="bx bx-shopping-bag"></i></span>
-                    <span class="text-sm font-medium">Events</span>
-                </a>
-            </li>   
+            @if (auth()->user()->role == 'admin')
+                <li>
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                                class="bx bx-home"></i></span>
+                        <span class="text-sm font-medium">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('users') }}"
+                        class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                                class="bx bx-shopping-bag"></i></span>
+                        <span class="text-sm font-medium">Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('categories') }}"
+                        class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                                class="bx bx-shopping-bag"></i></span>
+                        <span class="text-sm font-medium">Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('allEvenements') }}"
+                        class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                                class="bx bx-shopping-bag"></i></span>
+                        <span class="text-sm font-medium">Events</span>
+                    </a>
+                </li>
             @elseif(auth()->user()->role == 'organisateur')
-            <li>
-                <a href="{{route('Evenements')}}"
-                    class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                            class="bx bx-shopping-bag"></i></span>
-                    <span class="text-sm font-medium">Events</span>
-                </a>
-            </li>    
+                <li>
+                    <a href="{{ route('Evenements') }}"
+                        class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                                class="bx bx-shopping-bag"></i></span>
+                        <span class="text-sm font-medium">Events</span>
+                    </a>
+                </li>
             @elseif(auth()->user()->role == 'client')
-            <li>
-                <a href="{{route('EvenementsC')}}"
-                    class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                            class="bx bx-shopping-bag"></i></span>
-                    <span class="text-sm font-medium">Events</span>
-                </a>
-            </li>              
+                <li>
+                    <a href="{{ route('EvenementsC') }}"
+                        class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                                class="bx bx-shopping-bag"></i></span>
+                        <span class="text-sm font-medium">Events</span>
+                    </a>
+                </li>
             @endif
         @endauth
 
