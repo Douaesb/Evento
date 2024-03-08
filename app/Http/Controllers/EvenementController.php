@@ -16,8 +16,7 @@ class EvenementController extends Controller
         $user = Auth::id();
         $categories = Categorie::all();
         $evenements = Evenement::orderby('created_at', 'desc')
-            ->get();
-        // dd($evenements);
+            ->paginate(9);
         return view('admin.allEvents', compact('evenements'), compact('categories'));
     }
 
@@ -31,7 +30,7 @@ class EvenementController extends Controller
             $searchTerm = $request->input('search');
             $query->where('titre', 'like', '%' . $searchTerm . '%');
         }
-        $evenements = $query->orderBy('created_at', 'desc')->get();
+        $evenements = $query->orderBy('created_at', 'desc')->paginate(9);
         return view('client.evenement', compact('evenements', 'reservation', 'categories'));
     }
 
@@ -43,7 +42,7 @@ class EvenementController extends Controller
         $categories = Categorie::all();
         $evenements = Evenement::where('user_id', $user)
             ->orderby('created_at', 'desc')
-            ->get();
+            ->paginate(9);
         // dd($evenements);
         return view('organisateur.evenement', compact('evenements'), compact('categories'));
     }
