@@ -265,7 +265,7 @@
 
                         @foreach ($evenements as $evenement)
                             <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 h-full">
-                                <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 ">
+                                <article class="overflow-hidden rounded-lg shadow-lg h-full bg-blue-100 border-2 border-blue-600">
                                     <div class="flex flex-col justify-between py-4 px-8 h-60">
                                         <div class="flex justify-between">
                                             <div>
@@ -294,7 +294,7 @@
                                         </h1>
                                         <div class="flex justify-between">
                                             <div class="flex flex-col justify-between gap-2 text-sm text-gray-600">
-                                                <div class="flex w-full gap-6">
+                                                <div class="flex w-full justify-between gap-6">
                                                     <div class="flex items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="16"
                                                             width="16" viewBox="0 0 384 512">

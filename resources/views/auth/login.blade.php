@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="font-[sans-serif] text-[#333] bg-white flex items-center justify-center md:h-screen p-4">
-        <div class="shadow-[0_2px_16px_-3px_rgba(30,10,150,0.5)] max-w-6xl rounded-md p-6">
+        <div class="shadow-blue-400 shadow-md max-w-6xl rounded-md p-6 border-2 border-blue-400">
 
             <div class="grid md:grid-cols-2 items-center gap-8">
                 <div class="max-md:order-1">
@@ -11,7 +11,7 @@
                 <form class="max-w-md w-full mx-auto" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-12">
-                        <h3 class="text-4xl font-extrabold text-blue-900">Sign in</h3>
+                        <h3 class="text-4xl font-extrabold text-white">Sign in</h3>
                     </div>
                     @if (session('banned_message'))
                        
@@ -66,14 +66,14 @@
                     <div class="flex items-center justify-between gap-2 mt-6">
                         <div class="flex items-center">
                             <input name="remember_me" id="remember_me" type="checkbox"
-                                class="h-4 w-4 shrink-0 text-blue-900 focus:ring-blue-500 border-gray-300 rounded" />
-                            <label for="remember-me" class="ml-3 block text-sm">
+                                class="h-4 w-4 shrink-0 text-blue-200 focus:ring-blue-500 border-gray-300 rounded" />
+                            <label for="remember-me" class="ml-3 block text-sm text-white">
                                 Remember me
                             </label>
                         </div>
                         <div>
                             @if (Route::has('password.request'))
-                                <a class="text-blue-900 text-sm hover:underline" href="{{ route('password.request') }}">
+                                <a class="text-blue-200 text-sm hover:underline" href="{{ route('password.request') }}">
                                     {{ __('Forgot your password?') }}
                                 </a>
                             @endif
@@ -84,8 +84,8 @@
                             class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-900 hover:bg-blue-800 focus:outline-none">
                             Login
                         </button>
-                        <p class="text-sm text-center mt-8">Don't have an account ? <a href="{{ route('registerOrg') }}"
-                                class="text-blue-900 font-semibold hover:underline ml-1 whitespace-nowrap">Register
+                        <p class="text-sm text-white text-center mt-8">Don't have an account ? <a href="{{ route('registerOrg') }}"
+                                class="text-blue-200 font-semibold hover:underline ml-1 whitespace-nowrap">Register
                                 here</a>
                         </p>
                     </div>

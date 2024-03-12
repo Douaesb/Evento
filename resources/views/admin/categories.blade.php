@@ -152,8 +152,7 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-4 md:p-5">
-                            <form class="space-y-4"
-                                action="{{ route('updateCategorie') }}" method="post">
+                            <form class="space-y-4" action="{{ route('updateCategorie') }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="col-span-2">
