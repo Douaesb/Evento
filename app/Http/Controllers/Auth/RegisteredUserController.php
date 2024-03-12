@@ -52,7 +52,12 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        $user = $request->user();
+        if($user->role == 'client'){
+            return redirect()->route('EvenementsC');
+        }elseif($user->role == 'organisateur'){
+            return redirect()->route('organisateur.home');
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }

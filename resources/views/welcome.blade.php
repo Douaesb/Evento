@@ -14,42 +14,35 @@
 
 </head>
 
-<body class="antialiased ">
+<body class="bg-cover" style="background-image: url('../img/bckevent.jpg');">
     {{-- <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"> --}}
     @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10  ">
             @auth
-                <a href="{{ url('/homeA') }}"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                @if (auth()->user()->role == 'admin')
+                    <a href="{{ url('/homeA') }}"
+                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                @endif
             @else
                 <a href="{{ route('login') }}"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                    class="font-semibold text-white border-2 border-blue-600 rounded-lg p-2 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
                     in</a>
 
                 @if (Route::has('registerCli'))
                     <a href="{{ route('registerCli') }}"
-                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                        class="ml-4 font-semibold text-white border-2 bg-yellow-400/50 rounded-lg p-2 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
                 @endif
             @endauth
         </div>
     @endif
-    <div class="min-h-screen  px-4 w-full mx-auto sm:px-10">
-        <div class="max-w-7xl w-full mx-auto py-16 pt-20">
-            <div class="grid lg:grid-cols-2 justify-center items-center gap-10">
+    <div class="flex justify-center items-center">
+        <div class="max-w-7xl w-full m-auto py-16 pt-20">
+            <div class="grid lg:grid-cols-2 justify-center items-center gap-10 m-20">
                 <div>
-                    <h1 class="md:text-5xl text-4xl text-blue-900 font-extrabold mb-6 md:!leading-[55px]">Welcome to Evento, keep in touch
+                    <h1 class="md:text-5xl text-4xl text-white font-extrabold mb-6 md:!leading-[55px]">Welcome to
+                        Evento, keep in touch
                     </h1>
-                    <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                        <div class="flex justify-start ">
-                            <div class="text-black rounded-lg max-w-xl font-[sans-serif]">
 
-                                <marquee class="text-4xl font-bold text-center mt-4 text-base font-italic"
-                                    behavior="scroll" direction="left" scrollamount="3">
-                                    You can assist events by reserving or even creating your own
-                                </marquee>
-                            </div>
-                        </div>
-                    </div>
                     <div class="flex flex-wrap gap-y-4 gap-x-8 mt-8">
                         <button
                             class='bg-blue-400 flex items-center transition-all font-semibold rounded-md px-1 py-1 w-fit'>
@@ -69,8 +62,9 @@
                         </button>
                     </div>
                 </div>
-                <div class="max-lg:mt-12 h-full">
-                    <img src="../../img/loginimg.jpeg" alt="banner img" class="w-full h-full object-cover" />
+                <div
+                    class=" flex justify-center max-lg:mt-12 h-80 w-80 rounded-full overflow-hidden shadow-lg border-2 border-blue-600">
+                    <img src="../../img/eventH.jpg" alt="banner img" class="w-full h-full object-cover rounded-full" />
                 </div>
             </div>
         </div>

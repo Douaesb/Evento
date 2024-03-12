@@ -14,7 +14,6 @@ class Reservation extends Model
         'titre',
         'date',
         'statut',
-        'numplace',
         'evenement_id',
         'user_id',
     ];

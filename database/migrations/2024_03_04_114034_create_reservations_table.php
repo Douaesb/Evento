@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('titre');
             $table->date('date');
             $table->string('statut');
-            $table->integer('numplace');
             $table->foreignId('evenement_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

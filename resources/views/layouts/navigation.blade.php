@@ -101,21 +101,17 @@
 
 
 <!-- Sidebar -->
-<div class="flex flex-col sm:w-56 bg-white min-h-screen overflow-hidden mt-1">
-    <div class="flex items-center justify-center h-20 shadow-md">
+<div class="flex flex-col sm:w-56 bg-white md:min-h-screen overflow-hidden mt-1">
+    <div class="flex items-center justify-between h-20 shadow-md sm:justify-center">
         <!-- Settings Dropdown -->
-        <div class="hidden sm:flex sm:items-center sm:ms-6">
+        <div class="sm:flex sm:items-center sm:ms-6">
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
-                    <button
-                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    <button class="inline-flex items-center px-3 py-2 border ml-12 md:ml-2 border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                         <div>{{ Auth::user()->name }}</div>
-
                         <div class="ms-1">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </button>
@@ -131,8 +127,7 @@
                         @csrf
 
                         <x-dropdown-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                            onclick="event.preventDefault(); this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-dropdown-link>
                     </form>
@@ -141,18 +136,16 @@
         </div>
 
         <!-- Hamburger -->
-        <div class="-me-2 flex items-center sm:hidden">
-            <button @click="open = ! open"
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+        {{-- <div class="-me-2 flex justify-center items-center sm:hidden">
+            <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                    <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-        </div>
+        </div> --}}
     </div>
+
 
     <ul class="flex flex-col py-4">
         @auth
@@ -169,7 +162,7 @@
                     <a href="{{ route('users') }}"
                         class="flex flex-row active items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                                class="bx bx-shopping-bag"></i></span>
+                            class="bx bx-user"></i></span>
                         <span class="text-sm font-medium">Users</span>
                     </a>
                 </li>
@@ -190,9 +183,17 @@
                     </a>
                 </li>
             @elseif(auth()->user()->role == 'organisateur')
+            <li>
+                <a href="{{ route('organisateur.home') }}"
+                    class="flex flex-row  items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
+                        class="bx bx-home"></i></span>
+                    <span class="text-sm font-medium">Home</span>
+                </a>
+            </li>
                 <li>
                     <a href="{{ route('Evenements') }}"
-                        class="flex flex-row bg-blue-100 items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
                                 class="bx bx-shopping-bag"></i></span>
                         <span class="text-sm font-medium">Events</span>
@@ -209,22 +210,6 @@
                 </li>
             @endif
         @endauth
-
-        <!-- <li>
-            <a href="#" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-bell"></i></span>
-                <span class="text-sm font-medium">Notifications</span>
-                <span class="ml-auto mr-6 text-sm bg-red-100 rounded-full px-3 py-px text-red-500">5</span>
-            </a>
-        </li> -->
-        {{-- <li>
-            <a href="dashboard.php?deconn"
-                class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i
-                        class="bx bx-log-out"></i></span>
-                <span class="text-sm font-medium">Logout</span>
-            </a>
-        </li> --}}
     </ul>
 
 </div>

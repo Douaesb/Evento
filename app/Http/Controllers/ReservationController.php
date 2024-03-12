@@ -16,7 +16,6 @@ class ReservationController extends Controller
                 'titre' => $evenement->titre,
                 'date' => now(),
                 'statut' => 'Reserved',
-                'numplace' => $this->getNextPlaceNumber($evenement),
                 'evenement_id' => $evenement->id,
                 'user_id' => auth()->id(),
             ]);
@@ -27,21 +26,12 @@ class ReservationController extends Controller
                     'titre' => $evenement->titre,
                     'date' => now(),
                     'statut' => 'Pending',
-                    'numplace' => null,
                     'evenement_id' => $evenement->id,
                     'user_id' => auth()->id(),
                 ]);
             }
         }
         return redirect()->route('EvenementsC');
-    }
-
-    private function getNextPlaceNumber($evenement)
-    {
-        $highestReservedPlace = Reservation::where('evenement_id', $evenement->id)
-            ->where('statut', 'Accepted')
-            ->max('numplace');
-        return $highestReservedPlace + 1;
     }
 
     public function viewReservations($eventId)
@@ -57,7 +47,6 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($reservationId);
         // dd($reservation);
         $reservation->statut = $request->statut;
-        $reservation->numplace = $this->getNextPlaceNumber($reservation->evenement);
         $reservation->evenement->decrement('places');
 
         $reservation->save();

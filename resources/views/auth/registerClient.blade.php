@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="font-[sans-serif] text-[#333] bg-white flex items-center justify-center md:h-screen p-4">
-        <div class="shadow-[0_2px_16px_-3px_rgba(30,10,150,0.5)] max-w-6xl rounded-md p-6">
+        <div class="shadow-blue-400 shadow-md max-w-6xl rounded-md p-6 border-2 border-blue-400">
             <div class="grid md:grid-cols-2 items-center gap-8">
                 <div class="max-md:order-1">
                     <img src="../../img/loginimg.jpeg" class="lg:w-11/12 w-full object-cover" alt="login-image" />
@@ -10,7 +10,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="mb-6 ml-4">
-                        <h3 class="text-2xl font-extrabold text-blue-900">Sign up</h3>
+                        <h3 class="text-2xl font-extrabold text-white">Sign up</h3>
                     </div>
                     <div class="flex gap-4 m-4">
                         <a href="{{ route('registerCli') }}"
@@ -18,7 +18,7 @@
                             Client
                         </a>
                         <a href="{{ route('registerOrg') }}"
-                            class="border border-blue-900 flex justify-center w-fit p-2 rounded">
+                            class="border border-blue-400 text-white flex justify-center w-fit p-2 rounded">
                             Organisateur
                         </a>
                     </div>
@@ -95,8 +95,8 @@
                             class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-900 hover:bg-blue-800 focus:outline-none">
                             Register
                         </button>
-                        <p class="text-sm text-center mt-8">Already have an account ? <a href="{{ route('login') }}"
-                                class="text-blue-900 font-semibold hover:underline ml-1 whitespace-nowrap">Login
+                        <p class="text-sm text-center mt-8 text-white">Already have an account ? <a href="{{ route('login') }}"
+                                class="text-blue-200 font-semibold hover:underline ml-1 whitespace-nowrap">Login
                                 here</a>
                         </p>
                     </div>
